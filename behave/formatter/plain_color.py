@@ -2,6 +2,7 @@
 
 from behave.formatter.ansi_escapes import escapes
 from behave.formatter.plain import PlainFormatter
+from behave.model_core import Status
 from behave.textutil import make_indentation
 
 
@@ -58,7 +59,7 @@ class PlainColorFormatter(PlainFormatter):
         plain_text = self.step_format % (indent, step.keyword, step.name)
 
         # pretty formater prints not executed steps as skipped
-        status = step.status if executed else 'skipped'
+        status = step.status if executed else Status.skipped
 
         self.stream.write(
             escapes[status] + plain_text + escapes['reset']
