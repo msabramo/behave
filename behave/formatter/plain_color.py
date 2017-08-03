@@ -54,13 +54,11 @@ class PlainColorFormatter(PlainFormatter):
         return super().eof(*args, **kwargs)
 
     def print_step(self, step, executed=True):
-        from behave.model_core import Status
-
         indent = make_indentation(2 * self.indent_size)
         plain_text = self.step_format % (indent, step.keyword, step.name)
 
         # pretty formater prints not executed steps as skipped
-        status = step.status if executed else Status.skipped
+        status = step.status if executed else 'skipped'
 
         self.stream.write(
             escapes[status] + plain_text + escapes['reset']
