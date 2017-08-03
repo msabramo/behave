@@ -2,7 +2,6 @@
 
 from behave.formatter.ansi_escapes import escapes
 from behave.formatter.plain import PlainFormatter
-from behave.model_core import Status
 from behave.textutil import make_indentation
 
 
@@ -55,6 +54,8 @@ class PlainColorFormatter(PlainFormatter):
         return super().eof(*args, **kwargs)
 
     def print_step(self, step, executed=True):
+        from behave.model_core import Status
+
         indent = make_indentation(2 * self.indent_size)
         plain_text = self.step_format % (indent, step.keyword, step.name)
 
